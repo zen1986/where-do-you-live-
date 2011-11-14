@@ -1,0 +1,70 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#content {
+    height: 700px;
+    width: 100%;
+    overflow:hidden;
+    position: relative;
+}
+#map_canvas {
+    position: relative;
+    float: left;
+    left: 10px;
+    width: 70%;
+    height: 100%;
+}
+#friends_pane {
+    position: relative;
+    float: right;
+    right: 10px;
+    width: 25%;
+    height: 100%;
+    background-color: gainsboro;
+    overflow-y: scroll; 
+}
+
+.friend_name {
+    cursor: pointer;
+}
+.friend_name:hover {
+    background-color: white;
+}
+#menu {
+    height:40px;
+    background-color: steelblue;
+}
+.menu_item {
+    width: 120px;
+    height: 20px;
+    margin-top: 10px;
+    float:right;
+    color: cornsilk ;
+    cursor: pointer;
+    border-right: 1px solid hsl(0, 0%, 80%);
+}
+.last_menu_item {
+    border-right: 0px;
+}
+.menu_item:hover {
+    color: yellow;
+}
+#change_location {
+    position: absolute;
+    left: 100px;
+    top: -100px;
+    width: 600px;
+    height: 100px;
+    z-index: 100;
+}
+#change_location>span {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    cursor: pointer;
+}
+#confirmation {
+    height: 30px;
+}
