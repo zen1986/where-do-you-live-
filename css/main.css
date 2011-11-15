@@ -22,39 +22,60 @@ html, body {
     right: 10px;
     width: 25%;
     height: 100%;
-    background-color: gainsboro;
     overflow-y: scroll; 
+    border-left: 1px solid #0B5998;
+    border-bottom: 1px solid #0B5998;
 }
 
 .friend_name {
     cursor: pointer;
+    color: #000000;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 2px;
+    text-overflow: ellipsis;
+    font-family: Arial,Helvetica,sans-serif;
 }
 .friend_name:hover {
-    background-color: white;
+    background-color: #32f9f9;
 }
 #menu {
     height:40px;
-    background-color: steelblue;
+    background-color: #0B5998;
+}
+#share_items {
+    float: left;
+    position: relative;
+}
+
+#menu_items {
+    float: right;
+    position: relative;
 }
 .menu_item {
     width: 120px;
     height: 20px;
+    float: right;
     margin-top: 10px;
-    float:right;
-    color: cornsilk ;
+    color: #D8DFEA;
     cursor: pointer;
-    border-right: 1px solid hsl(0, 0%, 80%);
+    border-right: 1px solid hsl(0, 0%, 80%); 
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    font-size: 12px;
 }
 .last_menu_item {
     border-right: 0px;
+    width: 50px;
 }
 .menu_item:hover {
-    color: yellow;
+    color: white;
 }
 #change_location {
     position: absolute;
     left: 100px;
-    top: -100px;
+    top: -120px;
     width: 600px;
     height: 100px;
     z-index: 100;
@@ -67,4 +88,44 @@ html, body {
 }
 #confirmation {
     height: 30px;
+}
+
+#help_div {
+    position: absolute;
+    left: 100px;
+    top: -420px;
+    width: 600px;
+    height: 350px;
+    z-index: 100;
+    background-color: ghostwhite;
+    
+    border-right-style: solid;
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-right-color: #000000;
+    border-left-color: #000000;
+    border-bottom-color: #000000;
+    border-top-color: #000000;
+}
+#help_div>span {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+.fb-like {
+    margin-top: 10px;
+    margin-left: 4px;
+}
+
+p, h3 {
+    margin-left: 20px;
+    margin-right: 10px;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
 }

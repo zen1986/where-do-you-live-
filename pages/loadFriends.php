@@ -14,14 +14,19 @@ $location = "";
 $qa = "";
 $pa = "";
 $fid = "";
-foreach ($friends as $fid=>$name) {
-    $user = getUser($fid);
-    if ($user) {
-        $location = $user->location;
-        $qa = $user->qa;
-        $pa = $user->pa;
-        echo "<div location=\"$location\" qa='$qa' pa='$pa' id='$fid' name='$name' class='friend_name'>$name</div>";
+if (count($friends)>0) {
+    foreach ($friends as $fid=>$name) {
+        $user = getUser($fid);
+        if ($user) {
+            $location = $user->location;
+            $qa = $user->qa;
+            $pa = $user->pa;
+            echo "<div location=\"$location\" qa='$qa' pa='$pa' id='$fid' name='$name' class='friend_name'>$name</div>";
+        }
     }
+}
+else {
+    echo 'none';
 }
 
 //for ($i=0;$i<200;$i++) {

@@ -24,14 +24,26 @@ if (!$ret) {
     $qa = $ret->qa;
     $pa = $ret->pa;
 }
-
+$appId = $config['appId'];
 ?>   
 <!DOCTYPE html>
-<html>
+<html xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
   <head>
-    <title>Google Maps JavaScript API v3 Example: Map Simple</title>
+    <title>Facemap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
+    <meta property="og:title" content="Facemap"/>
+    <meta property="og:type" content="movie"/>
+    <meta property="og:url" content="http://apps.facebook.com/where_friends"/>
+    <meta property="og:image" content="http://ia.media-imdb.com/rock.jpg"/>
+    <meta property="og:site_name" content="IMDb"/>
+    <meta property='fb:app_id' content='$appId' />
+    <meta property="og:description"
+          content="A group of U.S. Marines, under command of
+                   a renegade general, take over Alcatraz and
+                   threaten San Francisco Bay with biological
+                   weapons."/>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.4.min.js"></script>
     <link href="css/main.css" rel="stylesheet" type="text/css" />
@@ -67,6 +79,7 @@ if (!$ret) {
       function validateAddress() {
         var input = document.getElementById('location');
         var address = input.value;
+        
         geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var a = results[0];
@@ -78,16 +91,32 @@ if (!$ret) {
                 $("#hidden_q").val(latlng.Qa);
             }
             else {
+                $("#input_address").html(status);
             }
         });
     }
     </script>
   </head>
   <body>
+        <!--required by facebook js api-->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        
         <div id="menu">
-            <div class="menu_item last_menu_item" id="menu_rank" align="center" onclick="showChangeLocation()">Help</div>
-            <div class="menu_item" id="menu_liked" align="center" onclick="window.location = 'index.php?page=liked';">Privacy Setting</div>
-            <div class="menu_item " id="menu_main" align="center" onclick="showChangeLocation()">Change Location</div>
+            <div id="share_items">
+                <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-action="recommend"></div>
+            </div>
+            <div id="menu_items">
+                <div class="menu_item last_menu_item" id="menu_rank" align="center" onclick="showHelp()">Help</div>
+                <!--<div class="menu_item" id="menu_liked" align="center" >Privacy Setting</div>-->
+                <div class="menu_item " id="menu_main" align="center" onclick="showChangeLocation()">Change Location</div>
+            </div>
         </div>
       <div id="content">
           <div id="change_location">
@@ -108,6 +137,21 @@ if (!$ret) {
               </form>
               <span onclick="hideChangeLocation()">close</span>
           </div>
+          <div id="help_div">
+              <h3>Help</h3>
+              <p>Purpose:</p>
+              <p>Due to certain reasons, some people need to move from place to place, thus losing close contact with some friends. Social network site doesn't remedy this situation as it doesn't connect people physically. 
+                  This app is meant compensate this by tracking your friends' current living place, such that you can discover some old friends near your new place. Just call them out to have a drink, or play basketball at the community club. You won't feel lonely or isolated now.
+                  Use this app to update your own living place after moving. It also may introduce new friends to you.
+              
+              </p>
+              <p>Simple to use.</p>
+              <p>Just enter your living location to start.After that you can see your friends face on the map if they are using the App.</p>
+              <p>To invite more friends, use the Recommend Button on Top left.</p>
+              <p>If you have any feedback, please email to zen1986@gmail.com</p>
+              <span onclick="hideHelp()">close</span>
+          </div>
+          
           <div id="map_canvas"></div>
           <div id="friends_pane"></div>
       </div>
@@ -117,12 +161,21 @@ if (!$ret) {
           }
           
           function hideChangeLocation() {
-              $("#change_location").animate({"top": -100});
+              $("#change_location").animate({"top": -120});
+          }
+          
+          function showHelp() {
+              $("#help_div").animate({"top": 0});
+          }
+          
+          function hideHelp() {
+              $("#help_div").animate({"top": -420});
           }
           <?php if (isset($location)): ?>
           $("#friends_pane").load("pages/loadFriends.php", function (r, t) {
               if (t == 'success') {
                     $("#friends_pane").append("<div location=\"<?php echo $location;?>\" qa='<?php echo $qa;?>' pa='<?php echo $pa;?>' id='<?php echo $user;?>' name='me' class='friend_name'>me</div>");
+
                     var f_divs = $("#friends_pane div");
                     for (var i=0;i<f_divs.length;i++) {
                         var div = f_divs[i];
@@ -165,6 +218,7 @@ if (!$ret) {
           });
           <?php else: ?>
                 showChangeLocation();
+                showHelp();
           <?php endif; ?>
       </script>
   </body>
